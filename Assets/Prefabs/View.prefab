@@ -54,10 +54,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 100
-    m_Right: 100
-    m_Top: 50
-    m_Bottom: 50
+    m_Left: 50
+    m_Right: 50
+    m_Top: 25
+    m_Bottom: 25
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -82,9 +82,9 @@ MonoBehaviour:
   OverwriteTheme: {fileID: 0}
   _viewData: {fileID: 11400000, guid: 8cc63bbec10bcbd4084612708ce968f1, type: 2}
   _headerContainer: {fileID: 9126808903834196708}
-  _headerStyle: 0
+  _headerStyle: 1
   _bodyContainer: {fileID: 7039101478385044803}
-  _bodyStyle: 0
+  _bodyStyle: 2
   _footerContainer: {fileID: 5568570816995212137}
   _footerStyle: 0
 --- !u!114 &8576921949336189030
@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 3211789131874416762}
   - component: {fileID: 3111451014901411401}
   - component: {fileID: 5159220396594584956}
+  - component: {fileID: 8608207855377913705}
   m_Layer: 5
   m_Name: Container_Footer
   m_TagString: Untagged
@@ -175,6 +176,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8608207855377913705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568570816995212137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: 10
+  m_LayoutPriority: 1
 --- !u!1 &7039101478385044803
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +290,7 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 4
+  m_FlexibleHeight: 60
   m_LayoutPriority: 1
 --- !u!1 &9126808903834196708
 GameObject:
@@ -365,5 +386,5 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 2
+  m_FlexibleHeight: 30
   m_LayoutPriority: 1
