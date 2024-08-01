@@ -27,12 +27,12 @@ public class UI_Animation_Button : MonoBehaviour
     [Range(0, 1f)][SerializeField] private float _animationDuration = 0.5f;
 
     private bool _isOpen = false;
-    [SerializeField] private Vector2 _initialPosition;
-    [SerializeField] private Vector2 _currentPosition;
-    [SerializeField] private Vector2 _upOffset;
-    [SerializeField] private Vector2 _downOffset;
-    [SerializeField] private Vector2 _leftOffset;
-    [SerializeField] private Vector2 _rightOffset;
+    private Vector2 _initialPosition;
+    private Vector2 _currentPosition;
+    private Vector2 _upOffset;
+    private Vector2 _downOffset;
+    private Vector2 _leftOffset;
+    private Vector2 _rightOffset;
     private Coroutine _animateContainerCoroutine;
 
     private void OnValidate(){
@@ -45,13 +45,13 @@ public class UI_Animation_Button : MonoBehaviour
         _distanceToAnimate.x = Mathf.Max(0, _distanceToAnimate.x);
         _distanceToAnimate.y = Mathf.Max(0, _distanceToAnimate.y);
 
-        _initialPosition = _containerRectTransform.anchoredPosition;
+        _initialPosition = _container.transform.position;
     }
 
     #region AnimationFuncionality
 
     private void Start(){
-        _initialPosition = _containerRectTransform.anchoredPosition;
+        _initialPosition = _container.transform.position;
 
         InitializeOffsetPostion();
     }
@@ -59,8 +59,8 @@ public class UI_Animation_Button : MonoBehaviour
     private void InitializeOffsetPostion(){
         _upOffset = new Vector2(0, _distanceToAnimate.y);
         _downOffset = new Vector2(0, -_distanceToAnimate.y);
-        _rightOffset = new Vector2(_distanceToAnimate.y, 0);
-        _leftOffset = new Vector2(-_distanceToAnimate.y, 0);
+        _rightOffset = new Vector2(_distanceToAnimate.x, 0);
+        _leftOffset = new Vector2(-_distanceToAnimate.x, 0);
     }
 
     [ContextMenu("Toogle Open Close")]
@@ -71,6 +71,7 @@ public class UI_Animation_Button : MonoBehaviour
             OpenWindow();
     }
 
+    [ContextMenu("Toogle Open")]
     public void OpenWindow(){
         if(_isOpen)
             return;
@@ -84,6 +85,7 @@ public class UI_Animation_Button : MonoBehaviour
         _animateContainerCoroutine = StartCoroutine(AnimateWindow(true));
     }
 
+    [ContextMenu("Toogle Close")]
     public void CloseWindow(){
         if(!_isOpen)
             return;
@@ -122,18 +124,18 @@ public class UI_Animation_Button : MonoBehaviour
         if(open)
         {
             targetPosition = _initialPosition;
-            _containerRectTransform.anchoredPosition = _initialPosition + GetOffset(_openDirection);
-            _currentPosition = _containerRectTransform.anchoredPosition;
+            _container.transform.position = _initialPosition + GetOffset(_openDirection);
+            _currentPosition = _container.transform.position;
         }            
         else{
-            _currentPosition = _containerRectTransform.anchoredPosition;
+            _currentPosition = _container.transform.position;
             targetPosition = _currentPosition + GetOffset(_closeDirection);
         }
 
         while(elapsedTime < _animationDuration){
             float evaluationAtTime = _easingCurve.Evaluate(elapsedTime / _animationDuration);
 
-            _containerRectTransform.anchoredPosition = Vector2.Lerp(_currentPosition, targetPosition, evaluationAtTime);
+            _container.transform.position = Vector2.Lerp(_currentPosition, targetPosition, evaluationAtTime);
 
             _containerCanvasGroup.alpha = open ? Mathf.Lerp(0f,1f,evaluationAtTime) : Mathf.Lerp(1f,0f,evaluationAtTime);
 
@@ -141,14 +143,14 @@ public class UI_Animation_Button : MonoBehaviour
             yield return null;
         }
 
-        _containerRectTransform.anchoredPosition = targetPosition;
+        _container.transform.position = targetPosition;
         _containerCanvasGroup.alpha = open ? 1f: 0f;
         _containerCanvasGroup.blocksRaycasts = open;
 
         if(!open)
         {
             _button.gameObject.SetActive(false);
-            _containerRectTransform.anchoredPosition = _initialPosition;
+            _container.transform.position = _initialPosition;
         }
     }
 
