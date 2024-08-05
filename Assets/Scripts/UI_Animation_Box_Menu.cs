@@ -1,12 +1,12 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class MoveAnimation : MonoBehaviour
+public class UI_Animation_Box_Menu : UI_CustomComponent_Animation
 {
     //Propriets Inspector
-    [SerializeField] private float _moveDuration, _delayTime;
-    [SerializeField] private Vector2 _distanceToAnimate = new Vector2(5, 5);
-    [SerializeField] private AnimationCurve _customOutElastic;
+    [SerializeField] private Vector2 _distanceToAnimate = new Vector2(300, 300);
+    [SerializeField] private AnimationCurve _customEase;
 
     //Components
     private RectTransform _rectTransform;
@@ -20,7 +20,8 @@ public class MoveAnimation : MonoBehaviour
     private float _rightOffset;
 
     #region Setup
-    void Start()
+
+    public override void Setup()
     {
         //Get Components
         _rectTransform = GetComponent<RectTransform>();
@@ -47,16 +48,17 @@ public class MoveAnimation : MonoBehaviour
     #region Animations
 
     [ContextMenu("Start animation")]
-    public void StartAnimation(){
+    public override IEnumerator StartAnimation(){
         Sequence startAnimationSequence = DOTween.Sequence();
         startAnimationSequence
-            .Insert(1,_rectTransform.DOAnchorPosY(_defaultPos.y, _moveDuration).SetEase(_customOutElastic))
-            .Insert(1,_canvasGroup.DOFade(1f, _moveDuration));
+            .Insert(1,_rectTransform.DOAnchorPosY(_defaultPos.y, _animationDuration).SetEase(_customEase))
+            .Insert(1,_canvasGroup.DOFade(1f, _animationDuration));
+        yield return startAnimationSequence.WaitForCompletion();
     }
 
     [ContextMenu("OnClick_Play")]
     public void OnClick_Play(){
-        _rectTransform.DOAnchorPosX(_leftOffset, _moveDuration).SetDelay(_delayTime).SetEase(Ease.InBack);
+        _rectTransform.DOAnchorPosX(_leftOffset, _animationDuration).SetEase(Ease.InBack);
     }
 
     #endregion
