@@ -2,7 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class UI_Animation_Box_Menu : UI_CustomComponent_Animation
+public class UI_Animation_Box_Menu : UI_AbstractComponent_Animation
 {
     //Propriets Inspector
     [SerializeField] private Vector2 _distanceToAnimate = new Vector2(300, 300);

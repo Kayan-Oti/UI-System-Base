@@ -2,7 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class UI_Animation_Button2 : UI_CustomComponent_Animation
+public class UI_Animation_Button2 : UI_AbstractComponent_Animation
 {
     //Propriets Inspector
     [SerializeField] private AnimationCurve _customEase;
