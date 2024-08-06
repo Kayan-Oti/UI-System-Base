@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class UI_CustomComponent_Animation : MonoBehaviour
+public abstract class UI_AbstractComponent_Animation : MonoBehaviour
 {
     [SerializeField] protected float _animationDuration;
     void Start()
